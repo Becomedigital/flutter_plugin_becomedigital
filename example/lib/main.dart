@@ -17,7 +17,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
   FlutterPluginBecomedigital flutterPluginBecomedigital =
       FlutterPluginBecomedigital();
 
@@ -61,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('BECOME PLUGIN Flutter'),
         ),
         body: SafeArea(
           child: Padding(
