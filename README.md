@@ -1,6 +1,6 @@
 # flutter_plugin_becomedigital
 
-A new flutter plugin project.
+[pub.dev flutter_plugin_becomedigital](https://pub.dev/packages/flutter_plugin_becomedigital)
 
 ## Getting Started
 
@@ -59,8 +59,9 @@ class _MyAppState extends State<MyApp> {
         clientSecret: '<YOUR_CLIENT_SECRET>',
         contractId: '<YOUR_CONTRACT_ID>',
         useGallery: true,
+        /// El parámetro validationType es customizable y puede tomar una o más valores dependiendo del tipo de contrato y la cantidad de tipos de documento que el cliente espere aceptar
         validatiopnTypes: 'PASSPORT/LICENSE/DNI/VIDEO',
-        userId: '123456',
+        userId: DateTime.now().millisecondsSinceEpoch.toString(),
       ),
     );
   }
@@ -98,10 +99,23 @@ class _MyAppState extends State<MyApp> {
 }
 
 ```
-### Android 
-Establecer minSdkVersion 21
-Agregar permisos de internet en AndroidManifest
-<uses-permission android:name="android.permission.INTERNET"/>
+### Instalación en Android 
+1. Establecer minSdkVersion 21 en `app/build.gradle`
+
+2. Agregar permisos de internet en AndroidManifest
+
+` <uses-permission android:name="android.permission.INTERNET"/>`
+
+3. Agregar a `app/build.gradle` 
+
+`proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'`
+
+4. Agregar en el archivo `proguard-rules.pro` (crearlo sino está presente) en `app` lo siguiente 
+
+` -keep class androidx.navigation.fragment.NavHostFragment
+`
 
 
 ### Errores comunes
