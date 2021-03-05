@@ -1,4 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="becomedigital.net.flutter_plugin_becomedigital">
+    package="becomedigital.net.flutter_plugin_becomedigital">
+
+    <application>
+        <activity android:name=".ActivityPrueba"></activity>
+    </application>
 
 </manifest>

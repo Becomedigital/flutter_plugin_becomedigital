@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_plugin_becomedigital/BecomeError.dart';
+import 'package:flutter_plugin_becomedigital/ResponseIV.dart';
 import 'package:flutter_plugin_becomedigital/become_digital_config.dart';
 import 'package:flutter_plugin_becomedigital/flutter_plugin_becomedigital.dart';
 
@@ -19,50 +21,40 @@ class _MyAppState extends State<MyApp> {
   FlutterPluginBecomedigital flutterPluginBecomedigital =
       FlutterPluginBecomedigital();
 
+  ResponseIv responseIv;
+  BecomeError becomeError;
+
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initBecome();
   }
 
   initBecome() {
-    flutterPluginBecomedigital.initBecome(
-      BecomeDigitalConfig(
-        clientId: '',
-        clientSecret: '',
-        contractId: '',
-        useGallery: true,
-        validatiopnTypes: 'A/B/',
-      ),
-    );
     flutterPluginBecomedigital.setBecomeCallback((result) {
+      setState(() {
+        responseIv = result;
+      });
       print(result);
     }, (error) {
-      print('Error');
+      setState(() {
+        becomeError = error;
+      });
     });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterPluginBecomedigital.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+  handlePressAuth() {
+    flutterPluginBecomedigital.initBecome(
+      BecomeDigitalConfig(
+        clientId: 'acc_demo',
+        clientSecret: 'FKLDM63GPH89TISBXNZ4YJUE57WRQA25',
+        contractId: '2',
+        useGallery: true,
+        validatiopnTypes: 'PASSPORT/LICENSE/DNI/VIDEO',
+        userId: '123456',
+      ),
+    );
   }
-
-  handlePressAuth() {}
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +63,26 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-            child: RaisedButton(
-          onPressed: () {
-            handlePressAuth();
-          },
-          child: Text('Iniciar autenticación'),
-        )),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Error: ${becomeError?.message}"),
+                Text('Respuesta: ${responseIv?.toString()}'),
+                RaisedButton(
+                  onPressed: () {
+                    handlePressAuth();
+                  },
+                  child: Text('Iniciar autenticación'),
+                ),
+              ],
+            )),
+          ),
+        ),
       ),
     );
   }
