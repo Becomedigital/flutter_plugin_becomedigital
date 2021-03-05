@@ -55,9 +55,9 @@ class _MyAppState extends State<MyApp> {
   handlePressAuth() {
     flutterPluginBecomedigital.initBecome(
       BecomeDigitalConfig(
-        clientId: 'acc_demo',
-        clientSecret: 'FKLDM63GPH89TISBXNZ4YJUE57WRQA25',
-        contractId: '2',
+        clientId: '<YOUR_CLIENT_ID>',
+        clientSecret: '<YOUR_CLIENT_SECRET>',
+        contractId: '<YOUR_CONTRACT_ID>',
         useGallery: true,
         validatiopnTypes: 'PASSPORT/LICENSE/DNI/VIDEO',
         userId: '123456',
