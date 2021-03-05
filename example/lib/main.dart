@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         contractId: '2',
         useGallery: true,
         validatiopnTypes: 'PASSPORT/LICENSE/DNI/VIDEO',
-        userId: '123456',
+        userId: DateTime.now().toString(),
       ),
     );
   }
