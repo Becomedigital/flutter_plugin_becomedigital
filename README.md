@@ -3,6 +3,14 @@
 [pub.dev flutter_plugin_becomedigital](https://pub.dev/packages/flutter_plugin_becomedigital)
 
 ## Getting Started
+Agregar al pubspec.yaml la dependencia
+
+<code>
+dependencies:
+
+    flutter_plugin_becomedigital: ^0.0.1
+</code>
+
 
 
 ## Llamado al plugin desde FLUTTER
